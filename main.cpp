@@ -46,5 +46,6 @@ int main()
     std::vector<double> Xr1k = {0, 0};
     Xr1k[0] += 2 * Xrc[0] * xrk[0];
     Xr1k[1] += 2 * Xrc[1] * xrk[1];
+    // привет
   }
 }
