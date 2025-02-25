@@ -3,11 +3,12 @@
 
 #define n 2
 #define precision 0.001
+#define k1 100
+#define k2 300
+#define b 5
 
 int main() 
 {
-  double k1 = 100, k2 = 300, b = 5;
-
   double x1, x2;
   std::cin >> x1 >> x2;
 
