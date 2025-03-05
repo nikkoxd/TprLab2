@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <vector>
 
 #define n 2
 #define precision 0.001
@@ -51,5 +52,7 @@ int main()
     // как дела?
     // я хочу домо  й
     // я тоже хочу домой
+
+    // privet
   }
 }
