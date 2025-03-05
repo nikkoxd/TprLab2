@@ -1,3 +1,5 @@
+// http://bigor.bmstu.ru/?cnt/?prn=y/?doc=MO/ch0605.mod
+
 #include <cmath>
 #include <iostream>
 #include <vector>
