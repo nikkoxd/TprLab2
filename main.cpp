@@ -29,6 +29,7 @@ int main()
 
     double max = 0;
     double min = k1 * R[0][0] + k2 * R[0][1] + b;
+    std::vector<double> minX = {0, 0};
     std::vector<double> xrk = {0, 0};
     for (int i = 0; i < n; i++)
     {
@@ -41,6 +42,8 @@ int main()
       if (f < min)
       {
         min = f;
+        minX[0] = R[i][0];
+        minX[1] = R[i][1];
       }
     }
 
@@ -72,11 +75,12 @@ int main()
       }
     }
 
+    std::cout << minX[0] << " " << minX[1] << std::endl;        
     if (max <= precision) 
     {
       break;
     }
-  }
 
-  std::cout << bruh1 << " " << bruh2;
+    // 😭
+  }
 }
