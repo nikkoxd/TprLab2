@@ -13,6 +13,7 @@
 int main() 
 {
   double x1, x2;
+  double bruh1 = 0, bruh2 = 0;
   std::cin >> x1 >> x2;
 
   double l = 1;
@@ -66,6 +67,8 @@ int main()
       if (aboba > max) 
       {
         max = aboba;
+        bruh1 = R[i][0];
+        bruh2 = R[i][1];
       }
     }
 
@@ -74,4 +77,6 @@ int main()
       break;
     }
   }
+
+  std::cout << bruh1 << " " << bruh2;
 }
