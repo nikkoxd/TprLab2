@@ -27,6 +27,7 @@ int main()
     };
 
     double max = 0;
+    double min = k1 * R[0][0] + k2 * R[0][1] + b;
     std::vector<double> xrk = {0, 0};
     for (int i = 0; i < n; i++)
     {
@@ -35,6 +36,10 @@ int main()
       {
         max = f;
         xrk = R[i];
+      }
+      if (f < min)
+      {
+        min = f;
       }
     }
 
@@ -50,12 +55,23 @@ int main()
     std::vector<double> Xr1k = {0, 0};
     Xr1k[0] += 2 * Xrc[0] * xrk[0];
     Xr1k[1] += 2 * Xrc[1] * xrk[1];
-    // привет
-    // как дела?
-    // я хочу домо  й
-    // я тоже хочу домой
 
-    // privet
-    // hi
+    double fXr1k = k1 * Xr1k[0] + k2 * Xr1k[1] + b;
+
+    max = 0;
+    for (int i = 0; i < n; i++)
+    {
+      double f = k1 * R[i][0] + k2 * R[i][1] + b;
+      double aboba = f - fXr1k;
+      if (aboba > max) 
+      {
+        max = aboba;
+      }
+    }
+
+    if (max <= precision) 
+    {
+      break;
+    }
   }
 }
