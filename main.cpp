@@ -14,6 +14,7 @@ int main()
 {
   double x1, x2;
   double bruh1 = 0, bruh2 = 0;
+  int index = 0;
   std::cin >> x1 >> x2;
 
   double l = 1;
@@ -28,56 +29,67 @@ int main()
     };
 
     double max = 0;
-    double min = k1 * R[0][0] + k2 * R[0][1] + b;
+    double min = k1 * R[0][0] + k2 * R[1][0] + b;
     std::vector<double> minX = {0, 0};
     std::vector<double> xrk = {0, 0};
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i <= n; i++)
     {
-      double f = k1 * R[i][0] + k2 * R[i][1] + b;
+      double f = k1 * R[0][i] + k2 * R[1][i] + b;
       if (f > max) 
       {
         max = f;
-        xrk = R[i];
+        xrk = {R[0][i], R[1][i]};
+        index = i;
       }
-      if (f < min)
-      {
-        min = f;
-        minX[0] = R[i][0];
-        minX[1] = R[i][1];
-      }
+      // if (f < min)
+      // {
+      //   min = f;
+      //   minX[0] = R[i][0];
+      //   minX[1] = R[i][1];
+      // }
     }
 
     std::vector<double> Xrc = {0, 0};
     for (int i = 0; i < n; i++)
     {
-      Xrc[0] += R[i][0];
-      Xrc[1] += R[i][1];
+      Xrc[0] += R[0][i];
+      Xrc[1] += R[1][i];
     }
     Xrc[0] /= n;
     Xrc[1] /= n;
 
     std::vector<double> Xr1k = {0, 0};
-    Xr1k[0] += 2 * Xrc[0] * xrk[0];
-    Xr1k[1] += 2 * Xrc[1] * xrk[1];
+    Xr1k[0] += 2 * Xrc[0] - xrk[0];
+    Xr1k[1] += 2 * Xrc[1] - xrk[1];
+
+    R[0][index] = Xr1k[0];
+    R[1][index] = Xr1k[1];
 
     double fXr1k = k1 * Xr1k[0] + k2 * Xr1k[1] + b;
 
     max = 0;
-    for (int i = 0; i < n; i++)
+    min = fXr1k;
+    for (int i = 0; i <= n; i++)
     {
-      double f = k1 * R[i][0] + k2 * R[i][1] + b;
-      double aboba = f - fXr1k;
-      if (aboba > max) 
+      if (i != index)
       {
-        max = aboba;
-        bruh1 = R[i][0];
-        bruh2 = R[i][1];
+        double f = k1 * R[0][i] + k2 * R[1][i] + b;
+        double aboba = std::abs(f - fXr1k);
+        max = std::max(max, aboba);
+        min = std::min(min, f);
       }
+      // if (aboba > max) 
+      // {
+      //   max = aboba;
+      //   bruh1 = R[i][0];
+      //   bruh2 = R[i][1];
+      // }
     }
 
-    std::cout << minX[0] << " " << minX[1] << std::endl;        
+    // std::cout << minX[0] << " " << minX[1] << std::endl;
     if (max <= precision) 
     {
+      std::cout << "Точка минимума: " << min; 
       break;
     }
 
