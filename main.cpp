@@ -41,12 +41,6 @@ int main()
         xrk = {R[0][i], R[1][i]};
         index = i;
       }
-      // if (f < min)
-      // {
-      //   min = f;
-      //   minX[0] = R[i][0];
-      //   minX[1] = R[i][1];
-      // }
     }
 
     std::vector<double> Xrc = {0, 0};
@@ -78,22 +72,12 @@ int main()
         max = std::max(max, aboba);
         min = std::min(min, f);
       }
-      // if (aboba > max) 
-      // {
-      //   max = aboba;
-      //   bruh1 = R[i][0];
-      //   bruh2 = R[i][1];
-      // }
     }
 
-    // std::cout << minX[0] << " " << minX[1] << std::endl;
     if (max <= precision) 
     {
       std::cout << "Точка минимума: " << min; 
       break;
     }
-
-    // 😭
-    // 🙂🤢
   }
 }
