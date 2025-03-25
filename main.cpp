@@ -30,7 +30,7 @@ int main()
   };
 
   std::vector<std::vector<double>> R_prev = R;
-  int j = 0;
+  std::vector<int> repeats = {0, 0, 0};
 
   while (l >= precision) 
   {
@@ -94,14 +94,16 @@ int main()
     {
       if (R[0][i] == R_prev[0][i] && R[1][i] == R_prev[1][i]) 
       {
-        j++;
-        break;
+        repeats[i]++;
+        if (repeats[i] == m) 
+        {
+          std::cout << "bruh" << std::endl;
+        }
       }
-    }
-    if (j == m) 
-    {
-      std::cout << "bruh" << std::endl;
-      /* j = 0; */
+      else
+      {
+        repeats[i] = 0;
+      }
     }
   }
 }
