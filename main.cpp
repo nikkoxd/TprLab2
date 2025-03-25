@@ -13,7 +13,7 @@
 
 int main() 
 {
-  int m = std::round(1.65 * n + 0.05 * n * n);
+  int m = std::ceil(1.65 * n + 0.05 * n * n);
 
   double x1, x2;
   double bruh1 = 0, bruh2 = 0;
