@@ -29,6 +29,8 @@ int main()
     {x2, x2 + r2, x2 + r1}
   };
 
+  std::vector<std::vector<double>> R_prev = R;
+
   while (l >= precision) 
   {
     double max = 0;
@@ -84,6 +86,8 @@ int main()
     }
 
     // здесь ты проверяешь каждую вершину, повторилась она m раз или нет
-    // 
+    // OK
+
+    R_prev = R;
   }
 }
