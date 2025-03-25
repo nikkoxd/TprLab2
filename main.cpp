@@ -14,7 +14,7 @@
 
 int main() 
 {
-  int m = std::ceil(1.65 * n + 0.05 * n * n);
+  int m = std::ceil(1.65 * n + 0.05 * n * n); // m = 4
 
   double x1, x2;
   double bruh1 = 0, bruh2 = 0;
@@ -98,12 +98,14 @@ int main()
         repeats[i]++;
         if (repeats[i] == m) 
         {
-          std::cout << "bruh" << std::endl;
+          std::cout << "bruh " << max << std::endl;
         }
       }
       else
       {
         repeats[i] = 0;
+        R_prev[0][i] = R[0][i];
+        R_prev[1][i] = R[1][i];
       }
     }
   }
