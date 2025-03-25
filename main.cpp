@@ -9,6 +9,7 @@
 #define k1 100
 #define k2 300
 #define b 5
+#define reduction_coef 0.5
 /* #define m 4 */
 
 int main() 
