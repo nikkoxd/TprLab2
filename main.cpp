@@ -9,10 +9,12 @@
 #define k1 100
 #define k2 300
 #define b 5
-#define m 4
+/* #define m 4 */
 
 int main() 
 {
+  int m = std::round(1.65 * n + 0.05 * n * n);
+
   double x1, x2;
   double bruh1 = 0, bruh2 = 0;
   int index = 0;
