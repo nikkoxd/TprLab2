@@ -30,6 +30,7 @@ int main()
   };
 
   std::vector<std::vector<double>> R_prev = R;
+  int j = 0;
 
   while (l >= precision) 
   {
@@ -89,5 +90,18 @@ int main()
     // OK
 
     R_prev = R;
+    for (int i = 0; i < n; i++) 
+    {
+      if (R[0][i] == R_prev[0][i] && R[1][i] == R_prev[1][i]) 
+      {
+        j++;
+        break;
+      }
+    }
+    if (j == m) 
+    {
+      std::cout << "bruh" << std::endl;
+      /* j = 0; */
+    }
   }
 }
