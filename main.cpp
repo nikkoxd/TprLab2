@@ -1,112 +1,35 @@
-// http://bigor.bmstu.ru/?cnt/?prn=y/?doc=MO/ch0605.mod 🤢
-
-#include <cmath>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
-#define n 2
-#define precision 0.001
-#define k1 100
-#define k2 300
-#define b 5
-#define reduction_coef 0.5
-/* #define m 4 */
+using namespace std;
 
-int main() 
+#define E 0.001
+
+int main()
 {
-  int m = std::ceil(1.65 * n + 0.05 * n * n); // m = 4
+    int i = 1;
+    double point[2] = {1, 1};
+    double gradient[2] = {200, 600};
+    double grModule = sqrt(200 * 200 + 600 * 600);
 
-  double x1, x2;
-  double bruh1 = 0, bruh2 = 0;
-  int index = 0;
-  double l = 1;
-  std::cin >> x1 >> x2;
-
-  double r1 = l * (std::sqrt(n+1) + n - 1) / (n * std::sqrt(2));
-  double r2 = l * (std::sqrt(n+1) - 1) / (n * std::sqrt(2));
-
-  std::vector<std::vector<double>> R = {
-    {x1, x1 + r1, x1 + r2},
-    {x2, x2 + r2, x2 + r1}
-  };
-
-  std::vector<std::vector<double>> R_prev = R;
-  std::vector<int> repeats = {0, 0, 0};
-
-  while (l >= precision) 
-  {
-    double max = 0;
-    double min = k1 * R[0][0] + k2 * R[1][0] + b;
-    std::vector<double> minX = {0, 0};
-    std::vector<double> xrk = {0, 0};
-    for (int i = 0; i <= n; i++)
+    while (grModule > E)
     {
-      double f = k1 * R[0][i] + k2 * R[1][i] + b;
-      if (f > max) 
-      {
-        max = f;
-        xrk = {R[0][i], R[1][i]};
-        index = i;
-      }
+        double h2 = pow(gradient[0], 2) * 100 + pow(gradient[1], 2) * 300;
+        double h = -(gradient[0] * point[0] * 2) * 100;
+        h -= gradient[1] * point[1] * 300;
+        double hval = (h2 * 2) / (-h);
+
+        point[0] = point[0] - gradient[0] * hval;
+        point[1] = point[1] - gradient[1] * hval;
+        gradient[0] = 200 * point[0];
+        gradient[1] = 600 * point[1];
+
+        grModule = sqrt(pow(gradient[0], 2) + pow(gradient[1], 2));
+        cout << i++ << " " << grModule << endl;
+        // if (i > 10) break;
     }
 
-    std::vector<double> Xrc = {0, 0};
-    for (int i = 0; i < n; i++)
-    {
-      Xrc[0] += R[0][i];
-      Xrc[1] += R[1][i];
-    }
-    Xrc[0] /= n;
-    Xrc[1] /= n;
-
-    std::vector<double> Xr1k = {0, 0};
-    Xr1k[0] += 2 * Xrc[0] - xrk[0];
-    Xr1k[1] += 2 * Xrc[1] - xrk[1];
-
-    R[0][index] = Xr1k[0];
-    R[1][index] = Xr1k[1];
-
-    double fXr1k = k1 * Xr1k[0] + k2 * Xr1k[1] + b;
-
-    max = 0;
-    min = fXr1k;
-    for (int i = 0; i <= n; i++)
-    {
-      if (i != index)
-      {
-        double f = k1 * R[0][i] + k2 * R[1][i] + b;
-        double aboba = std::abs(f - fXr1k);
-        max = std::max(max, aboba);
-        min = std::min(min, f);
-      }
-    }
-
-    if (max <= precision) 
-    {
-      std::cout << "Точка минимума: " << min; 
-      break;
-    }
-
-    // здесь ты проверяешь каждую вершину, повторилась она m раз или нет
-    // OK
-
-    R_prev = R;
-    for (int i = 0; i < n; i++) 
-    {
-      if (R[0][i] == R_prev[0][i] && R[1][i] == R_prev[1][i]) 
-      {
-        repeats[i]++;
-        if (repeats[i] == m) 
-        {
-          std::cout << "bruh " << max << std::endl;
-        }
-      }
-      else
-      {
-        repeats[i] = 0;
-        R_prev[0][i] = R[0][i];
-        R_prev[1][i] = R[1][i];
-      }
-    }
-  }
+    cout << "Minimum point: (" << point[0] << ", " << point[1] << ")\n";
+    cout << "Minimum: " << 100 * pow(point[0], 2) + 300 * pow(point[1], 2) + 5;
 }
